@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  title: MyText
+  content: MyText
+  from_date: 2018-04-01 14:20:38
+  to_date: 2018-04-01 14:20:38
+  address: MyText
+  reward: MyText
+
+two:
+  user_id: 1
+  title: MyText
+  content: MyText
+  from_date: 2018-04-01 14:20:38
+  to_date: 2018-04-01 14:20:38
+  address: MyText
+  reward: MyText

@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   post "login" => "users#login"
   post "logout" => "users#logout"
 
-  get "tasks/index" => "tasks#index"
-
+  get "requests/index" => "requests#index"
   get "requests/new" => "requests#new"
+  post "requests/create" => "requests#create"
 
 end

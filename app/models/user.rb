@@ -4,5 +4,9 @@ class User < ApplicationRecord
   validates :password, {presence: true}
 
   has_secure_password
-  
+
+  def requests
+    return Request.where(user_id: self.id)
+  end
+
 end

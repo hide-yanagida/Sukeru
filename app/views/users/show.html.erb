@@ -1,0 +1,22 @@
+<h1>ユーザ詳細画面</h1>
+<p>氏名</p>
+  <%= @user.name %>
+<p>メール(あとで消す)</p>
+  <%= @user.email %>
+<p>依頼中の仕事</p>
+
+<% @user.requests.each do |request| %>
+<div>
+  <h3><%= link_to(request.title, "/requests/#{request.id}") %></h3>
+  <p>仕事内容</p>
+    <%= request.content %>
+  <p>集合場所</p>
+    <%= request.address %>
+  <p>日時</p>
+    <%= request.from_date %><%= request.from_time.strftime("%H:%M") %>
+    <p>から</p>
+    <%= request.to_date %><%= request.to_time.strftime("%H:%M") %>
+  <p>御礼</p>
+    <%= request.reward %>
+</div>
+<% end %>

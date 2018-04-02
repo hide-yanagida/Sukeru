@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       flash[:notice] = "ログインしました"
-      redirect_to("/tasks/index")
+      redirect_to("/requests/index")
     else
       @error_message = "メールアドレスまたはパスワードが間違っています"
       @email = params[:email]
@@ -41,6 +41,10 @@ class UsersController < ApplicationController
     session[:user_id] = nil
     flash[:notice] = "ログアウトしました"
     redirect_to("/")
+  end
+
+  def show
+    @user = User.find_by(id: params[:id])
   end
 
 end

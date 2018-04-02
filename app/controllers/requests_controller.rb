@@ -27,4 +27,8 @@ class RequestsController < ApplicationController
   def index
     @requests = Request.all.order(updated_at: :desc)
   end
+
+  def show
+    @request = Request.find_by(id: params[:id])
+  end
 end

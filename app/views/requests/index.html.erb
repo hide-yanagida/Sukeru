@@ -1,9 +1,9 @@
 <h1>リクエスト一覧</h1>
 <% @requests.each do |request| %>
   <div>
-    <h3><%= request.title %></h3>
+    <h3><%= link_to(request.title, "/requests/#{request.id}") %></h3>
     <p>依頼者</p>
-    <%= request.user.name %>
+    <%= link_to(request.user.name, "/users/#{request.user.id}") %>
     <p>仕事内容</p>
       <%= request.content %>
     <p>集合場所</p>

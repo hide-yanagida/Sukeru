@@ -13,7 +13,8 @@ class RequestsController < ApplicationController
       to_date: params[:to_date],
       to_time: params[:to_time],
       address: params[:address],
-      reward: params[:reward]
+      reward: params[:reward],
+      number: params[:number]
     )
 
     if @request.save

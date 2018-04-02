@@ -7,6 +7,7 @@ class Request < ApplicationRecord
   validates :to_time, {presence: true}
   validates :address, {presence: true}
   validates :reward, {presence: true}
+  validates :number, {presence: true}
 
 
   def user

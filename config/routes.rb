@@ -8,9 +8,12 @@ Rails.application.routes.draw do
   post "logout" => "users#logout"
   get "users/:id" => "users#show"
 
-  get "requests/index" => "requests#index"
+  get "requests" => "requests#index"
   get "requests/new" => "requests#new"
   post "requests/create" => "requests#create"
   get "requests/:id" => "requests#show"
+
+  post "tasks/:request_id/create" => "tasks#create"
+  post "tasks/:request_id/destroy" => "tasks#destroy"
 
 end

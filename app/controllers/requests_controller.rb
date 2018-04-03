@@ -19,7 +19,7 @@ class RequestsController < ApplicationController
 
     if @request.save
       flash[:notice] = "リクエストを登録しました"
-      redirect_to("/requests/index")
+      redirect_to("/requests")
     else
       render("requests/new")
     end

@@ -14,4 +14,17 @@ class Request < ApplicationRecord
     return User.find_by(id: self.user_id)
   end
 
+  def remaining
+    request_number = Request.find_by(id: self.id).number
+    task_count = Task.where(request_id: self.id).count
+    remaining = request_number - task_count
+    if remaining == 0
+      message = "定員に達しています"
+    else
+      message = "あと#{remaining}人"
+    end
+    
+    return message
+  end
+
 end

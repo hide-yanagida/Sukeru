@@ -10,6 +10,8 @@
   <%= @request.from_date %><%= @request.from_time.strftime("%H:%M") %>
   <p>から</p>
   <%= @request.to_date %><%= @request.to_time.strftime("%H:%M") %>
+<p>募集人数(<%= @request.remaining %>)</p>
+  <%= @request.number %>
 <p>御礼</p>
   <%= @request.reward %>
 

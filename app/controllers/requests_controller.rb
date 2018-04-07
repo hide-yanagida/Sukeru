@@ -8,10 +8,8 @@ class RequestsController < ApplicationController
       user_id: @current_user.id,
       title: params[:title],
       content: params[:content],
-      from_date: params[:from_date],
-      from_time: params[:from_time],
-      to_date: params[:to_date],
-      to_time: params[:to_time],
+      from_datetime: params[:from_datetime],
+      to_datetime: params[:to_datetime],
       address: params[:address],
       reward: params[:reward],
       number: params[:number]
@@ -32,4 +30,36 @@ class RequestsController < ApplicationController
   def show
     @request = Request.find_by(id: params[:id])
   end
+
+  def edit
+    @request = Request.find_by(id: params[:id])
+  end
+
+  def update
+    @request = Request.find_by(id: params[:id])
+
+    @request.title = params[:title]
+    @request.content = params[:content]
+    @request.from_datetime = params[:from_datetime]
+    @request.to_datetime = params[:to_datetime]
+    @request.address = params[:address]
+    @request.reward = params[:reward]
+    @request.number = params[:number]
+
+    if @request.save
+      flash[:notice] = "リクエストを編集しました"
+      redirect_to("/requests/#{@request.id}")
+    else
+      render("requests/edit")
+    end
+  end
+
+  def destroy
+    @request = Request.find_by(id: params[:id])
+    @request.tasks_destroy
+    @request.destroy
+    flash[:notice] = "リクエストを削除しました"
+    redirect_to("/users/#{@current_user.id}")
+  end
+
 end

@@ -9,9 +9,9 @@
     <p>集合場所</p>
       <%= request.address %>
     <p>日時</p>
-      <%= request.from_date %><%= request.from_time.strftime("%H:%M") %>
+      <%= request.from_datetime %>
       <p>から</p>
-      <%= request.to_date %><%= request.to_time.strftime("%H:%M") %>
+      <%= request.to_datetime %>
     <p>募集人数(<%= request.remaining %>)</p>
       <%= request.number %>
     <p>御礼</p>

@@ -1,10 +1,8 @@
 class Request < ApplicationRecord
   validates :title, {presence: true}
   validates :content, {presence: true}
-  validates :from_date, {presence: true}
-  validates :from_time, {presence: true}
-  validates :to_date, {presence: true}
-  validates :to_time, {presence: true}
+  validates :from_datetime, {presence: true}
+  validates :to_datetime, {presence: true}
   validates :address, {presence: true}
   validates :reward, {presence: true}
   validates :number, {presence: true}
@@ -14,6 +12,7 @@ class Request < ApplicationRecord
     return User.find_by(id: self.user_id)
   end
 
+  #残枠数を返す
   def remaining
     request_number = Request.find_by(id: self.id).number
     task_count = Task.where(request_id: self.id).count
@@ -23,8 +22,13 @@ class Request < ApplicationRecord
     else
       message = "あと#{remaining}人"
     end
-    
+
     return message
+  end
+
+  #リクエストの削除とともにtaskも削除する
+  def tasks_destroy
+    tasks = Task.where(request_id: self.id).destroy_all
   end
 
 end

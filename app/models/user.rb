@@ -9,6 +9,7 @@ class User < ApplicationRecord
     return Request.where(user_id: self.id)
   end
 
+  #残枠数を返す
   def remaining
     request_number = Request.find_by(id: self.request_id).number
     task_count = Task.where(request_id: self.request_id).count
@@ -18,7 +19,7 @@ class User < ApplicationRecord
     else
       message = "あと#{remaining}人"
     end
-    
+
     return message
   end
 

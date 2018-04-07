@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get "requests" => "requests#index"
   get "requests/new" => "requests#new"
   post "requests/create" => "requests#create"
+  get "requests/:id/edit" => "requests#edit"
+  post "requests/:id/update" => "requests#update"
+  post "requests/:id/destroy" => "requests#destroy"
   get "requests/:id" => "requests#show"
 
   post "tasks/:request_id/create" => "tasks#create"

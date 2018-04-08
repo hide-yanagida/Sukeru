@@ -1,0 +1,14 @@
+<h1>ユーザ情報編集画面</h1>
+<% @user.errors.full_messages.each do |message| %>
+  <div class="form-error">
+    <%= message %>
+  </div>
+<% end %>
+
+<%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %>
+  <p>氏名</p>
+  <input name="name" value="<%= @user.name %>">
+  <p>メールアドレス</p>
+  <input name="email" value="<%= @user.email %>">
+  <input type="submit" value="編集">
+<% end %>

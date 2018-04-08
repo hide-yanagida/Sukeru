@@ -4,6 +4,9 @@
 <p>メール(あとで消す)</p>
   <%= @user.email %>
 <p>依頼中の仕事</p>
+<% if @current_user.id == @user.id %>
+  <%= link_to("編集", "/users/#{@user.id}/edit") %>
+<% end %>
 
 <% @user.requests.each do |request| %>
 <div>

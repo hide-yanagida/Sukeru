@@ -15,10 +15,16 @@
 <p>御礼</p>
   <%= @request.reward %>
 
-<% if Task.find_by(user_id: @current_user.id, request_id: @request.id) %>
-  <%= link_to("やっぱすけない!!", "/tasks/#{@request.id}/destroy", {method: "post"}) %>
-<% else %>
-  <%= link_to("すける!!", "/tasks/#{@request.id}/create", {method: "post"}) %>
+<% if @current_user.id != @request.user_id %>
+  <% if @request.remaining == "定員に達しています" %>
+    <p>定員に達しています</p>
+  <% else %>
+    <% if Task.find_by(user_id: @current_user.id, request_id: @request.id) %>
+      <%= link_to("やっぱすけない!!", "/tasks/#{@request.id}/destroy", {method: "post"}) %>
+    <% else %>
+      <%= link_to("すける!!", "/tasks/#{@request.id}/create", {method: "post"}) %>
+    <% end %>
+  <% end %>
 <% end %>
 
 <% if @current_user.id == @request.user_id %>

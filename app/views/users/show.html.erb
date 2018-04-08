@@ -24,6 +24,13 @@
   <p>御礼</p>
     <%= request.reward %>
 
+  <% if Like.find_by(user_id: @current_user.id, request_id: request.id) %>
+    <%= link_to("Don't watch!", "/likes/#{request.id}/destroy", {method: "post"}) %>
+  <% else %>
+    <%= link_to("watch!!", "/likes/#{request.id}/create", {method: "post"}) %>
+  <% end %>
+  <%= request.likes_count %>
+
 <% if @current_user.id != request.user_id %>
   <% if request.remaining == "定員に達しています" %>
     <p>定員に達しています</p>

@@ -31,4 +31,8 @@ class Request < ApplicationRecord
     tasks = Task.where(request_id: self.id).destroy_all
   end
 
+  def likes_count
+    return Like.where(request_id: self.id).count
+  end
+
 end

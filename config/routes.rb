@@ -21,4 +21,7 @@ Rails.application.routes.draw do
   post "tasks/:request_id/create" => "tasks#create"
   post "tasks/:request_id/destroy" => "tasks#destroy"
 
+  post "likes/:request_id/create" => "likes#create"
+  post "likes/:request_id/destroy" => "likes#destroy"
+
 end

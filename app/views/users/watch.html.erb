@@ -1,0 +1,61 @@
+<h1>ユーザ詳細画面(watch中のやつ)</h1>
+<p>氏名</p>
+  <%= @user.name %>
+<p>メール(あとで消す)</p>
+  <%= @user.email %>
+<p>依頼中の仕事</p>
+<% if @current_user.id == @user.id %>
+  <%= link_to("編集", "/users/#{@user.id}/edit") %>
+<% end %>
+
+<ul>
+  <li><%= link_to("リクエスト", "/users/#{@user.id}") %></li>
+  <li><%= link_to("watch", "/users/#{@user.id}/watch") %></li>
+  <li><%= link_to("すける予定", "/users/#{@user.id}/tasks") %></li>
+</ul>
+
+<% @likes.each do |like| %>
+  <% request = Request.find_by(id: like.request_id) %>
+  <div>
+    <h3><%= link_to(request.title, "/requests/#{request.id}") %></h3>
+    <p>依頼者</p>
+    　<%= link_to(request.user.name, "/users/#{request.user.id}") %>
+    <p>仕事内容</p>
+      <%= request.content %>
+    <p>集合場所</p>
+      <%= request.address %>
+    <p>日時</p>
+      <%= request.from_datetime %>
+      <p>から</p>
+      <%= request.to_datetime %>
+    <p>募集人数(<%= request.remaining %>)</p>
+      <%= request.number %>
+    <p>御礼</p>
+      <%= request.reward %>
+
+    <% if Like.find_by(user_id: @current_user.id, request_id: request.id) %>
+      <%= link_to("Don't watch!", "/likes/#{request.id}/destroy", {method: "post"}) %>
+    <% else %>
+      <%= link_to("watch!!", "/likes/#{request.id}/create", {method: "post"}) %>
+    <% end %>
+    <%= request.likes_count %>
+
+  <% if @current_user.id != request.user_id %>
+    <% if request.remaining == "定員に達しています" %>
+      <p>定員に達しています</p>
+    <% else %>
+      <% if Task.find_by(user_id: @current_user.id, request_id: request.id) %>
+        <%= link_to("やっぱすけない!!", "/tasks/#{request.id}/destroy", {method: "post"}) %>
+      <% else %>
+        <%= link_to("すける!!", "/tasks/#{request.id}/create", {method: "post"}) %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+    <% if @current_user.id == request.user_id %>
+      <%= link_to("編集", "/requests/#{request.id}/edit") %>
+      <%= link_to("削除", "/requests/#{request.id}/destroy", {method: "post"}) %>
+    <% end %>
+
+  </div>
+<% end %>

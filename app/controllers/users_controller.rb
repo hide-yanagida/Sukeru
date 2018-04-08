@@ -64,4 +64,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def watch
+    @user = User.find_by(id: params[:id])
+    @likes = Like.where(user_id: @user.id)
+  end
+
+  def tasks
+    @user = User.find_by(id: params[:id])
+    @tasks = Task.where(user_id: @user.id)
+  end
+
 end

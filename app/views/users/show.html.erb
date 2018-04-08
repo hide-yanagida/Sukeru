@@ -8,9 +8,17 @@
   <%= link_to("編集", "/users/#{@user.id}/edit") %>
 <% end %>
 
+<ul>
+  <li><%= link_to("リクエスト", "/users/#{@user.id}") %></li>
+  <li><%= link_to("watch", "/users/#{@user.id}/watch") %></li>
+  <li><%= link_to("すける予定", "/users/#{@user.id}/tasks") %></li>
+</ul>
+
 <% @user.requests.each do |request| %>
 <div>
   <h3><%= link_to(request.title, "/requests/#{request.id}") %></h3>
+  <p>依頼者</p>
+  　<%= link_to(request.user.name, "/users/#{request.user.id}") %>
   <p>仕事内容</p>
     <%= request.content %>
   <p>集合場所</p>

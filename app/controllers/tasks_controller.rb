@@ -8,13 +8,13 @@ class TasksController < ApplicationController
       flash[:notice] = "既に定員に達しているため参加できませんでした"
     end
 
-    redirect_to("/requests/#{params[:request_id]}")
+    redirect_to("/users/#{@current_user.id}/tasks")
   end
 
   def destroy
     @task = Task.find_by(user_id: @current_user.id, request_id: params[:request_id])
     @task.destroy
     flash[:notice] = "やっぱすけません"
-    redirect_to("/requests/#{params[:request_id]}")
+    redirect_to("/users/#{@current_user.id}/tasks")
   end
 end

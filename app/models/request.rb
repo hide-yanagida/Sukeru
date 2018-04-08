@@ -28,7 +28,12 @@ class Request < ApplicationRecord
 
   #リクエストの削除とともにtaskも削除する
   def tasks_destroy
-    tasks = Task.where(request_id: self.id).destroy_all
+    Task.where(request_id: self.id).destroy_all
+  end
+
+  #リクエストの削除とともにlikeも削除する
+  def likes_destroy
+    Like.where(request_id: self.id).destroy_all
   end
 
   def likes_count

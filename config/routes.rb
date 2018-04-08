@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   post "users/:id/update" => "users#update"
   get "users/:id/edit" => "users#edit"
+  get "users/:id/tasks" => "users#tasks"
+  get "users/:id/watch" => "users#watch"
   get "signup" => "users#new"
   post "users/create" => "users#create"
   get "login" => "users#login_form"

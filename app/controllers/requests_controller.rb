@@ -57,6 +57,7 @@ class RequestsController < ApplicationController
   def destroy
     @request = Request.find_by(id: params[:id])
     @request.tasks_destroy
+    @request.likes_destroy
     @request.destroy
     flash[:notice] = "リクエストを削除しました"
     redirect_to("/users/#{@current_user.id}")

@@ -29,6 +29,7 @@ class RequestsController < ApplicationController
 
   def show
     @request = Request.find_by(id: params[:id])
+    @tasks = Task.where(request_id: params[:id])
   end
 
   def edit

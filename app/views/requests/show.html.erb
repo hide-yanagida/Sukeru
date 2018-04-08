@@ -39,3 +39,12 @@
   <%= link_to("編集", "/requests/#{@request.id}/edit") %>
   <%= link_to("削除", "/requests/#{@request.id}/destroy", {method: "post"}) %>
 <% end %>
+
+<p>すけてくれる人一覧</p>
+<% @tasks.each do |task| %>
+  <% sukelist = User.find_by(id: task.user_id) %>
+  <p>氏名</p>
+    <%= link_to(sukelist.name, "/users/#{sukelist.id}") %>
+  <p>メール(あとで消す)</p>
+    <%= sukelist.email %>
+<% end %>

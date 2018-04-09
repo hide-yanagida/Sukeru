@@ -2,6 +2,7 @@
 <h3><%= @request.title %></h3>
 <p>依頼者</p>
 <%= link_to(@request.user.name, "/users/#{@request.user.id}") %>
+<img src="<%= "/user_images/#{@request.user.image_name}" %>" width="100" height="100">
 <p>仕事内容</p>
   <%= @request.content %>
 <p>集合場所</p>
@@ -14,6 +15,7 @@
   <%= @request.number %>
 <p>御礼</p>
   <%= @request.reward %>
+<img src="<%= "/request_images/#{@request.image_name}" %>" width="100" height="100">
 
 <% if Like.find_by(user_id: @current_user.id, request_id: @request.id) %>
   <%= link_to("Don't watch!", "/likes/#{@request.id}/destroy", {method: "post"}) %>
@@ -45,6 +47,7 @@
   <% sukelist = User.find_by(id: task.user_id) %>
   <p>氏名</p>
     <%= link_to(sukelist.name, "/users/#{sukelist.id}") %>
+    <img src="<%= "/user_images/#{sukelist.image_name}" %>" width="100" height="100">
   <p>メール(あとで消す)</p>
     <%= sukelist.email %>
 <% end %>

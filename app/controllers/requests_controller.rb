@@ -15,6 +15,14 @@ class RequestsController < ApplicationController
       number: params[:number]
     )
 
+    if params[:image]
+      @request.image_name = "#{@request.id}.jpg"
+      image = params[:image]
+      File.binwrite("public/request_images/#{@request.image_name}", image.read)
+    else
+      @request.image_name = "no_image.jpg"
+    end
+
     if @request.save
       flash[:notice] = "リクエストを登録しました"
       redirect_to("/requests")
@@ -46,6 +54,12 @@ class RequestsController < ApplicationController
     @request.address = params[:address]
     @request.reward = params[:reward]
     @request.number = params[:number]
+
+    if params[:image]
+      @request.image_name = "#{@request.id}.jpg"
+      image = params[:image]
+      File.binwrite("public/request_images/#{@request.image_name}", image.read)
+    end
 
     if @request.save
       flash[:notice] = "リクエストを編集しました"

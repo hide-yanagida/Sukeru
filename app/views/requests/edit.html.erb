@@ -5,7 +5,7 @@
   </div>
 <% end %>
 
-<%= form_tag("/requests/#{@request.id}/update") do %>
+<%= form_tag("/requests/#{@request.id}/update", {multipart: true}) do %>
   <p>タイトル</p>
   <input name="title" value="<%= @request.title %>">
   <p>依頼内容</p>
@@ -19,6 +19,8 @@
   <input type="number" name="number" value="<%= @request.number %>">
   <p>御礼</p>
   <textarea name="reward"><%= @request.reward %></textarea>
+  <p>参考画像</p>
+  <input name="image" type="file">
 
   <input type="submit" value="すけてけろ〜">
 <% end %>

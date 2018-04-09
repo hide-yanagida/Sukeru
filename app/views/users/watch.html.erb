@@ -1,6 +1,7 @@
 <h1>ユーザ詳細画面(watch中のやつ)</h1>
 <p>氏名</p>
   <%= @user.name %>
+  <img src="<%= "/user_images/#{@user.image_name}" %>" width="100" height="100">
 <p>メール(あとで消す)</p>
   <%= @user.email %>
 <p>依頼中の仕事</p>
@@ -19,7 +20,8 @@
   <div>
     <h3><%= link_to(request.title, "/requests/#{request.id}") %></h3>
     <p>依頼者</p>
-    　<%= link_to(request.user.name, "/users/#{request.user.id}") %>
+      <%= link_to(request.user.name, "/users/#{request.user.id}") %>
+      <img src="<%= "/user_images/#{request.user.image_name}" %>" width="100" height="100">
     <p>仕事内容</p>
       <%= request.content %>
     <p>集合場所</p>
@@ -32,6 +34,7 @@
       <%= request.number %>
     <p>御礼</p>
       <%= request.reward %>
+    <img src="<%= "/request_images/#{request.image_name}" %>" width="100" height="100">
 
     <% if Like.find_by(user_id: @current_user.id, request_id: request.id) %>
       <%= link_to("Don't watch!", "/likes/#{request.id}/destroy", {method: "post"}) %>

@@ -13,3 +13,22 @@
  *= require_tree .
  *= require_self
  */
+
+ .watch-btn {
+   color: #8899a6;
+ }
+
+ .watch-btn-unwatch {
+   color: #0054ef;
+ }
+
+ .box2 {
+   display: flex;
+ 	 align-items: center;
+ }
+
+ .thumbnail img {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}

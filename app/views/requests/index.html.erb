@@ -1,41 +1,62 @@
-<h1>リクエスト一覧</h1>
+<h1 class="my-4">リクエスト一覧
+  <!--<small>気になる人をすけてみよう〜</small>-->
+</h1>
 <% @requests.each do |request| %>
-  <div>
-    <h3><%= link_to(request.title, "/requests/#{request.id}") %></h3>
-    <p>依頼者</p>
-    <%= link_to(request.user.name, "/users/#{request.user.id}") %>
-    <img src="<%= "/user_images/#{request.user.image_name}" %>" width="100" height="100">
-    <p>仕事内容</p>
-      <%= request.content %>
-    <p>集合場所</p>
-      <%= request.address %>
-    <p>日時</p>
-      <%= request.from_datetime %>
-      <p>から</p>
-      <%= request.to_datetime %>
-    <p>募集人数(<%= request.remaining %>)</p>
-      <%= request.number %>
-    <p>御礼</p>
-      <%= request.reward %>
-    <img src="<%= "/request_images/#{request.image_name}" %>" width="100" height="100">
+  <div class="row">
+    <div class="col-md-4">
+      <a href="/requests/<%= request.id %>">
+        <img class="img-fluid rounded mb-3 mb-md-0" src="<%= "/request_images/#{request.image_name}" %>">
+      </a>
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-2 thumbnail">
+          <a href="/users/<%= request.user.id %>">
+            <img src="<%= "/user_images/#{request.user.image_name}" %>">
+          </a>
+        </div>
+        <div class="col-md-10 box2">
+          <%= link_to(request.user.name, "/users/#{request.user.id}") %>
+        </div>
+      </div>
+      <h3><%= link_to(request.title, "/requests/#{request.id}") %></h3>
+        <%= request.content %>
+      <p>集合場所: <%= request.address %></p>
+      <p>日時: <%= request.from_datetime %>〜<%= request.to_datetime %></p>
+      <p>御礼: <%= request.reward %></p>
+      <div class="row">
+        <div class="col-md-2">
+          <% if Like.find_by(user_id: @current_user.id, request_id: request.id) %>
+            <%= link_to("/likes/#{request.id}/destroy", {method: "post"}) do%>
+              <span class="fa fa-eye fa-2x watch-btn-unwatch"></span>
+            <% end %>
+          <% else %>
+            <%= link_to("/likes/#{request.id}/create", {method: "post"}) do%>
+              <span class="fa fa-eye fa-2x watch-btn"></span>
+            <% end %>
+          <% end %>
+          <%= request.likes_count %>
+        </div>
 
-    <% if Like.find_by(user_id: @current_user.id, request_id: request.id) %>
-      <%= link_to("Don't watch!", "/likes/#{request.id}/destroy", {method: "post"}) %>
-    <% else %>
-      <%= link_to("watch!!", "/likes/#{request.id}/create", {method: "post"}) %>
-    <% end %>
-    <%= request.likes_count %>
-
-    <% if @current_user.id != request.user_id %>
-      <% if request.remaining == "定員に達しています" %>
-        <p>定員に達しています</p>
-      <% else %>
-        <% if Task.find_by(user_id: @current_user.id, request_id: request.id) %>
-          <%= link_to("やっぱすけない!!", "/tasks/#{request.id}/destroy", {method: "post"}) %>
-        <% else %>
-          <%= link_to("すける!!", "/tasks/#{request.id}/create", {method: "post"}) %>
-        <% end %>
-      <% end %>
-    <% end %>
+        <div class="col-md-offset-8 col-md-2">
+          <% if @current_user.id != request.user_id %>
+            <% if request.remaining == "定員に達しています" %>
+              <button type="button" class="btn btn-lg btn-success" disabled="disabled">定員です</button>
+            <% else %>
+              <% if Task.find_by(user_id: @current_user.id, request_id: request.id) %>
+                <%= link_to("/tasks/#{request.id}/destroy", {method: "post"}) do %>
+                  <button type="button" class="btn btn-warning">キャンセル</button>
+                <% end %>
+              <% else %>
+                <%= link_to("/tasks/#{request.id}/create", {method: "post"}) do %>
+                  <button type="button" class="btn btn-success">すける!</button>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
+  <hr>
 <% end %>

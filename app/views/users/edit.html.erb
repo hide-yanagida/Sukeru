@@ -1,19 +1,32 @@
 <h1>ユーザ情報編集画面</h1>
 <% @user.errors.full_messages.each do |message| %>
-  <div class="form-error">
+  <div class="alert alert-danger alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="閉じる"><span aria-hidden="true">×</span></button>
     <%= message %>
   </div>
 <% end %>
 
-<%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %>
-  <p>氏名</p>
-  <input name="name" value="<%= @user.name %>">
-  <p>自己紹介</p>
-  <textarea name="profile"><%= @user.profile %></textarea>
-  <p>メールアドレス</p>
-  <input name="email" value="<%= @user.email %>">
-  <p>画像</p>
-  <input name="image" type="file">
+<div class="wrapper">
+  <%= form_tag("/users/#{@user.id}/update", class: "form-signin", multipart: true) do %>
+    <div class="form-group">
+      <label>氏名</label>
+      <input class="form-control" name="name" value="<%= @user.name %>">
+    </div>
 
-  <input type="submit" value="編集">
-<% end %>
+    <div class="form-group">
+      <label>自己紹介</label>
+      <textarea class="form-control" name="profile"><%= @user.profile %></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>メールアドレス</label>
+      <input class="form-control" name="email" value="<%= @user.email %>">
+    </div>
+
+
+    <input type="file" name="image">
+
+
+    <button type="submit" class="btn btn-primary btn-block btn-lg">編集</button>
+  <% end %>
+</div>

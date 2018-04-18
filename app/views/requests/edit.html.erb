@@ -1,26 +1,43 @@
 <h1>リクエスト編集画面</h1>
+
 <% @request.errors.full_messages.each do |message| %>
-  <div class="form-error">
+  <div class="alert alert-danger alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="閉じる"><span aria-hidden="true">×</span></button>
     <%= message %>
   </div>
 <% end %>
 
-<%= form_tag("/requests/#{@request.id}/update", {multipart: true}) do %>
-  <p>タイトル</p>
-  <input name="title" value="<%= @request.title %>">
-  <p>依頼内容</p>
-  <textarea name="content"><%= @request.content %></textarea>
-  <p>日時</p>
-  <input type="datetime-local" name="from_datetime" value="<%= @request.from_datetime %>">
-  <input type="datetime-local" name="to_datetime" value="<%= @request.to_datetime %>">
-  <p>集合場所</p>
-  <input name="address" value="<%= @request.address %>">
-  <p>募集人数</p>
-  <input type="number" name="number" value="<%= @request.number %>">
-  <p>御礼</p>
-  <textarea name="reward"><%= @request.reward %></textarea>
-  <p>参考画像</p>
-  <input name="image" type="file">
+<div class="wrapper">
+  <%= form_tag("/requests/#{@request.id}/update", class: "form-signin", multipart: true) do %>
 
-  <input type="submit" value="すけてけろ〜">
-<% end %>
+    <div class="form-group">
+      <label>タイトル</label>
+      <input class="form-control" name="title" value="<%= @request.title %>">
+    </div>
+    <div class="form-group">
+      <label>依頼内容</label>
+      <textarea class="form-control" name="content"><%= @request.content %></textarea>
+    </div>
+    <div class="form-group">
+      <label>日時</label>
+      <input class="form-control" type="datetime-local" name="from_datetime" value="<%= @request.from_datetime %>">
+      <input class="form-control" type="datetime-local" name="to_datetime" value="<%= @request.to_datetime %>">
+    </div>
+    <div class="form-group">
+      <label>集合場所</label>
+      <input class="form-control" name="address" value="<%= @request.address %>">
+    </div>
+    <div class="form-group">
+      <label>募集人数</label>
+      <input class="form-control" type="number" name="number" value="<%= @request.number %>">
+    </div>
+    <div class="form-group">
+      <label>御礼</label>
+      <textarea class="form-control" name="reward"><%= @request.reward %></textarea>
+    </div>
+
+    <input type="file" name="image">
+
+    <button type="submit" class="btn btn-primary btn-block btn-lg">すけてけろ〜</button>
+  <% end %>
+</div>

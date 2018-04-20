@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user, {only: [:show, :edit, :update, :watch, :tasks]}
+  before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
+  before_action :ensure_correct_user, {only: [:edit, :update]}
+
   def new
     @user = User.new
   end
@@ -80,6 +84,13 @@ class UsersController < ApplicationController
   def tasks
     @user = User.find_by(id: params[:id])
     @tasks = Task.where(user_id: @user.id)
+  end
+
+  def ensure_correct_user
+    if @current_user.id != params[:id].to_i
+      flash[:notice] = "権限がありません"
+      redirect_to("/requests")
+    end
   end
 
 end

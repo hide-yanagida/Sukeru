@@ -1,4 +1,7 @@
 class RequestsController < ApplicationController
+  before_action :authenticate_user
+  before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
+
   def new
     @request = Request.new()
   end
@@ -76,6 +79,14 @@ class RequestsController < ApplicationController
     @request.destroy
     flash[:notice] = "リクエストを削除しました"
     redirect_to("/users/#{@current_user.id}")
+  end
+
+  def ensure_correct_user
+    @request = Request.find_by(id: params[:id])
+    if @request.user_id != @current_user.id
+      flash[:notice] = "権限がありません"
+      redirect_to("/requests")
+    end
   end
 
 end

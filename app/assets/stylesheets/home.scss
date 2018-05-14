@@ -4,15 +4,17 @@
 
 .header {
   background-color: yellow;
-  width: 100%;
 }
 
 .jumbotron {
   background-image: url(/images/helper.jpg);
   background-size: cover;
-  //height: 540px
 }
 
 .color-white {
   color: white;
+}
+
+.portfolio-item {
+  padding: 20px;
 }

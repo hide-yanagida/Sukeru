@@ -13,6 +13,14 @@
  *= require_tree .
  *= require_self
  */
+html body {
+  /* font-family: "Comic Sans MS"; */
+  /* background-color: #bed2c3; */
+}
+
+footer, nav {
+  background-color: #bed2c3;
+}
 
  .watch-btn {
    color: #8899a6;

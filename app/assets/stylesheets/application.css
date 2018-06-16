@@ -15,11 +15,12 @@
  */
 html body {
   /* font-family: "Comic Sans MS"; */
-  background-color: #ffffdd;
+  /*background-color: #ffffdd;*/
 }
 
 footer, nav {
-  background-color: #ffffdd;
+  background-color: #ffffff;
+  opacity: 0.9;
 }
 
  .watch-btn {
